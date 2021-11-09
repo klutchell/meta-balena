@@ -16,6 +16,7 @@ SRC_URI += " \
 	file://update-balena-supervisor.service \
 	file://update-balena-supervisor.timer \
 	file://balena-supervisor-healthcheck \
+	file://balena-supervisor-set-scheduling-prio \
 	file://tmpfiles-supervisor.conf \
 	file://migrate-supervisor-state.service \
 	"
@@ -90,6 +91,7 @@ do_install () {
 
 	install -d ${D}/usr/lib/balena-supervisor
 	install -m 0755 ${WORKDIR}/balena-supervisor-healthcheck ${D}/usr/lib/balena-supervisor/balena-supervisor-healthcheck
+	install -m 0755 ${WORKDIR}/balena-supervisor-set-scheduling-prio ${D}/usr/lib/balena-supervisor/balena-supervisor-set-scheduling-prio
 
 	# systemd tmpfiles configuration for supervisor
 	mkdir -p ${D}${sysconfdir}/tmpfiles.d

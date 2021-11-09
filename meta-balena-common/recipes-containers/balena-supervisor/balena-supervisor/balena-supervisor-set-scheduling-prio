@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -o errexit
+
+sleepSecs="$1"
+policy="$2"
+prio="$3"
+
+sleep "$sleepSecs"
+
+pids=$(balena top balena_supervisor -eo pid | tail -n +2)
+for pid in $pids; do
+	chrt --$policy --all-tasks --reset-on-fork --pid $prio $pid
+done
