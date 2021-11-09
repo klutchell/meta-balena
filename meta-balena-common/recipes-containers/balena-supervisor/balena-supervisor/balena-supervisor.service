@@ -31,9 +31,7 @@ ExecStartPre=-@BINDIR@/balena stop resin_supervisor
 ExecStartPre=-@BINDIR@/balena stop balena_supervisor
 ExecStartPre=/bin/systemctl is-active balena.service
 ExecStart=/usr/bin/healthdog --healthcheck=/usr/lib/balena-supervisor/balena-supervisor-healthcheck @BINDIR@/start-balena-supervisor
-ExecStartPost=/usr/lib/balena-supervisor/balena-supervisor-set-scheduling-prio 0 rr 10
-ExecStartPost=/usr/lib/balena-supervisor/balena-supervisor-set-scheduling-prio 10 rr 10
-ExecStartPost=/usr/lib/balena-supervisor/balena-supervisor-set-scheduling-prio 60 rr 10
+ExecStartPost=/usr/lib/balena-supervisor/balena-supervisor-set-scheduling-prio 5 rr 10
 ExecStop=-@BINDIR@/balena stop balena_supervisor
 
 [Install]

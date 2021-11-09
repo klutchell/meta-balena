@@ -1,0 +1,5 @@
+[Unit]
+Description=Set scheduling policies and priorities for critical balenaOS services
+
+[Service]
+ExecStart=/usr/lib/balena/set-os-scheduler-prios
