@@ -21,10 +21,9 @@ SRC_URI = "\
 	file://balena-host.service \
 	file://balena-host.socket \
 	file://balena-healthcheck \
-	file://balena-set-scheduling-prio \
-	file://scheduler-prios.service \
-	file://scheduler-prios.timer \
-	file://set-os-scheduler-prios \
+	file://scheduler-policies.service \
+	file://scheduler-policies.timer \
+	file://set-scheduler-policies \
 	file://var-lib-docker.mount \
 	file://balena.conf.storagemigration \
 	file://balena-tmpfiles.conf \
@@ -38,7 +37,7 @@ SECURITY_CFLAGS = "${SECURITY_NOPIE_CFLAGS}"
 SECURITY_LDFLAGS = ""
 
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "balena.service balena-host.socket var-lib-docker.mount scheduler-prios.service scheduler-prios.timer"
+SYSTEMD_SERVICE_${PN} = "balena.service balena-host.socket var-lib-docker.mount scheduler-policies.service scheduler-policies.timer"
 GO_IMPORT = "import"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-r balena-engine"
@@ -140,8 +139,8 @@ do_install() {
 	install -m 0644 ${S}/src/import/contrib/init/systemd/balena-engine.socket ${D}/${systemd_unitdir}/system
 
 	install -m 0644 ${WORKDIR}/balena.service ${D}/${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/scheduler-prios.service ${D}/${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/scheduler-prios.timer ${D}/${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/scheduler-policies.service ${D}/${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/scheduler-policies.timer ${D}/${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/balena-host.service ${D}/${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/balena-host.socket ${D}/${systemd_unitdir}/system
 
@@ -149,8 +148,7 @@ do_install() {
 
 	mkdir -p ${D}/usr/lib/balena
 	install -m 0755 ${WORKDIR}/balena-healthcheck ${D}/usr/lib/balena/balena-healthcheck
-	install -m 0755 ${WORKDIR}/balena-set-scheduling-prio ${D}/usr/lib/balena/balena-set-scheduling-prio
-	install -m 0755 ${WORKDIR}/set-os-scheduler-prios ${D}/usr/lib/balena/set-os-scheduler-prios
+	install -m 0755 ${WORKDIR}/set-scheduler-policies ${D}/usr/lib/balena/set-scheduler-policies
 
 	install -d ${D}${sysconfdir}/systemd/system/balena.service.d
 	install -c -m 0644 ${WORKDIR}/balena.conf.storagemigration ${D}${sysconfdir}/systemd/system/balena.service.d/storagemigration.conf

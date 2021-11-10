@@ -1,9 +1,12 @@
 [Unit]
 Description=Periodically set scheduling policies and priorities for critical balenaOS services
+After=balena.service
 
 [Timer]
-OnCalendar=*:0/10
+OnActiveSec=30
+OnUnitActiveSec=5min
 Persistent=false
+AccuracySec=5
 
 [Install]
-WantedBy=timers.target
+RequiredBy=balena.service

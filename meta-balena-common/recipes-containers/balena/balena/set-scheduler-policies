@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Engine
+pids=$(pidof balenad balena-engine-containerd)
+if [ $? == 0 ]; then
+    for pid in $pids; do
+        chrt --rr --all-tasks --reset-on-fork --pid 35 $pid
+    done
+fi
+
+# Supervisor
+pids=$(balena top balena_supervisor -eo pid)
+if [ $? == 0 ]; then
+    pids=$(echo $pids | grep -o "[0-9 ]*")
+    for pid in $pids; do
+        chrt --rr --all-tasks --reset-on-fork --pid 10 $pid
+    done
+fi
