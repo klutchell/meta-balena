@@ -779,7 +779,7 @@ python do_kernel_resin_aufs_fetch_and_unpack() {
         ('5.7', 'a903981607ce1f23154aee3e7547924c951125df'),
         ('5.8', '541e69ed9ceacb63105c88edd30355bf7267dc02'),
         ('5.9', 'a786c5eb13b3a45938ac1b829709d0b1d59cd47d'),
-        ('5.10', 'e52be5a0f1290b2d113f8bb82f33527ffab8b790'),
+        ('5.10', '5436ae4eab9808f58e397cb30018ed3ae5afa2eb'),
     ])
 
 
@@ -854,6 +854,31 @@ apply_aufs_patches () {
     $PATCH_CMD < `find ${WORKDIR}/aufs_standalone/ -name 'aufs*-mmap.patch'`
 }
 do_kernel_resin_aufs_fetch_and_unpack[postfuncs] += "apply_aufs_patches"
+
+python do_kernel_balena_rt_patches_fetch_and_unpack() {
+    bb.note("Kernel will be patched for RT.")
+
+    ### TODO(LMB): Do we need something like this? Doesn't seem ti be used]
+    ### anywhere in the aufs case
+    # d.setVar('SRCREV_rtpatch', "4eaa540cbe67ce664be041a150250a550490822b")
+    fetcher = bb.fetch2.Fetch(["https://cdn.kernel.org/pub/linux/kernel/projects/rt/5.10/patch-5.10.78-rt55.patch.xz;sha256sum=77a204c7ffd23b09ff1aa12b777dba0614214d4df317fb6489180d9105329cf1"], d)
+    fetcher.download()
+    fetcher.unpack(d.getVar('WORKDIR'))
+}
+
+# add our task to task queue - we need the kernel version (so we need to have the sources
+# unpacked and patched) in order to know what aufs patches version we fetch and unpack
+#
+# TODO(LMB): Review this comment after I have something that works
+addtask kernel_balena_rt_patches_fetch_and_unpack after do_patch before do_configure
+###kernel_balena_rt_patches_fetch_and_unpack[vardeps] += " BALENA_STORAGE BALENA_CONFIGS"
+
+# copy needed aufs files and apply aufs patches
+apply_rt_patches () {
+    cd ${S}
+    patch -p1 < ${WORKDIR}/patch-5.10.78-rt55.patch
+}
+do_kernel_balena_rt_patches_fetch_and_unpack[postfuncs] += "apply_rt_patches"
 
 #
 # Inject resin configs
