@@ -7,3 +7,5 @@ SRC_URI:append = " \
 RDEPENDS:${PN}:append = " openssl"
 
 ALTERNATIVE_PRIORITY[hwclock] = "100"
+
+TARGET_CFLAGS += " -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64"

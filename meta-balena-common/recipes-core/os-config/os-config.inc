@@ -2,6 +2,8 @@ inherit systemd cargo-dyn
 
 DEPENDS += "dbus openssl"
 
+TARGET_CFLAGS += " -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64"
+
 SRC_URI += " \
 	file://os-config.json \
 	file://os-config.service \
