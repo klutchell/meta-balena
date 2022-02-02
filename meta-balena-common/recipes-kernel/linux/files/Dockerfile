@@ -1,7 +1,7 @@
 FROM balenalib/intel-nuc-debian:buster-20210705
 
 # Install dependencies
-RUN apt-get update && apt-get install -y curl wget build-essential libelf-dev bc flex libssl-dev bison gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu python-minimal
+RUN apt-get update && apt-get install -y curl wget build-essential libelf-dev bc flex libssl-dev bison gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu python-minimal libgmp-dev libmpc-dev
 
 # Fetch kernel module headers built and source
 ADD example_module /usr/src/app/example_module_headers_src/
