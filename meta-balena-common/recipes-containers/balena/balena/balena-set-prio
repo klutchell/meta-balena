@@ -4,10 +4,6 @@
 #       pid file for it? Would be more reliable than using the process name. (I
 #       think this would bring other complications, though.)
 
-if [ ! -z "$1" ]; then
-	sleep "$1"
-fi
-
 DAEMON_PID=$(cat /var/run/balena-engine.pid)
 if [ ! -z "$DAEMON_PID" ]; then
 	chrt --rr --all-tasks --reset-on-fork --pid 35 $DAEMON_PID
