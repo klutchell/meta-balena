@@ -59,7 +59,8 @@ configIsUnchanged() {
 
 runSupervisor() {
     balena rm --force balena_supervisor resin_supervisor 2>/dev/null || true
-    balena run --cgroup-parent=balena.slice --privileged --name balena_supervisor \
+    balena run --privileged --name balena_supervisor \
+        --cgroup-parent=system.slice \
         --restart=always \
         --net=host \
         --cidenv=SUPERVISOR_CONTAINER_ID \

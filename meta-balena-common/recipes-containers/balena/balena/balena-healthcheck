@@ -16,4 +16,4 @@ fi
 
 # Check that we can start a new container
 balena rm --force balena_healthcheck 2>/dev/null || true
-balena run --rm --log-driver none --network none --name balena_healthcheck balena-healthcheck-image > /dev/null
+balena run --rm --cgroup-parent=system.slice --log-driver none --network none --name balena_healthcheck balena-healthcheck-image > /dev/null

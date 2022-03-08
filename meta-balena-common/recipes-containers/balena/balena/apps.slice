@@ -1,0 +1,6 @@
+[Unit]
+Description=balena user apps slice
+Before=slices.target
+
+[Slice]
+CPUShares=16
