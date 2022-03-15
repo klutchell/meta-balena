@@ -4,6 +4,7 @@ Requires=resin-boot.service bind-etc-NetworkManager-system-connections.service
 After=resin-boot.service bind-etc-NetworkManager-system-connections.service
 
 [Service]
+Slice=balena.slice
 ExecStart=@BASE_BINDIR@/bash @BINDIR@/balena-net-config
 Type=oneshot
 RemainAfterExit=yes

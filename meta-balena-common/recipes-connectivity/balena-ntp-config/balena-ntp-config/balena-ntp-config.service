@@ -4,6 +4,7 @@ Requires=balena-net-config.service
 After=balena-net-config.service
 
 [Service]
+Slice=balena.slice
 ExecStart=@BINDIR@/balena-ntp-config
 Type=oneshot
 RemainAfterExit=yes

@@ -3,6 +3,7 @@ Wants=balena-net-config.service
 After=balena-net-config.service
 
 [Service]
+Slice=balena.slice
 Type=simple
 OOMScoreAdjust=-1000
 ExecStart=
