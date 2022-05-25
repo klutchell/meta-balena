@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://${BALENA_COREBASE}/COPYING.Apache-2.0;md5=89aea4e17d9
 
 SRC_URI = " \
     file://balena-config-vars \
+    file://balena-engine-restarter.service \
     file://config-json.path \
     file://config-json.service \
     file://os-networkmanager \
@@ -14,6 +15,7 @@ SRC_URI = " \
     file://os-sshkeys.service \
     file://os-config-json \
     file://os-config-json.service \
+    file://restart-engine \
     file://unit-conf.json \
     file://test-input.json \
     file://test-conf.json \
@@ -42,6 +44,7 @@ do_compile[noexec] = "1"
 do_build[noexec] = "1"
 
 SYSTEMD_SERVICE:${PN} = " \
+    balena-engine-restarter.service \
     config-json.path \
     config-json.service \
     os-networkmanager.service \
@@ -119,9 +122,11 @@ do_install() {
     install -m 0755 ${WORKDIR}/os-udevrules ${D}${sbindir}/
     install -m 0755 ${WORKDIR}/os-sshkeys ${D}${sbindir}/
     install -m 0755 ${WORKDIR}/os-config-json ${D}${sbindir}/
+    install -m 0755 ${WORKDIR}/restart-engine ${D}${sbindir}/
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
+        install -c -m 0644 ${WORKDIR}/balena-engine-restarter.service ${D}${systemd_unitdir}/system
         install -c -m 0644 ${WORKDIR}/config-json.path ${D}${systemd_unitdir}/system
         install -c -m 0644 ${WORKDIR}/config-json.service ${D}${systemd_unitdir}/system
         install -c -m 0644 ${WORKDIR}/os-networkmanager.service ${D}${systemd_unitdir}/system

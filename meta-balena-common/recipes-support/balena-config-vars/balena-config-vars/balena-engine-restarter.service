@@ -1,0 +1,7 @@
+[Unit]
+Description=balenaEngine restarter service
+PartOf=config-json.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/restart-engine

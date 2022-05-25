@@ -37,11 +37,11 @@ MountFlags=slave
 LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity
-WatchdogSec=360
+WatchdogSec=%i
 Restart=always
 KillMode=process
 TimeoutStartSec=infinity
 
 [Install]
-Alias=balena-engine.service
+Alias=balena-engine@.service
 WantedBy=multi-user.target
