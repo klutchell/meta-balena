@@ -1,5 +1,6 @@
 [Unit]
 Description=Balena supervisor updater
+# TODO: Do we need to use balena@.service here?
 Requires=\
     balena.service \
     bind-etc-balena-supervisor.service \

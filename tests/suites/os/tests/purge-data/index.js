@@ -93,6 +93,7 @@ module.exports = {
 						(await this.context
 							.get()
 							.worker.executeCommandInHostOS(
+								// TODO: Do we need to use balena@.service here?
 								`systemctl is-active balena.service`,
 								this.link,
 							)) === 'active'
@@ -147,6 +148,7 @@ module.exports = {
 						(await this.context
 							.get()
 							.worker.executeCommandInHostOS(
+								// TODO: Do we need to use balena@.service here?
 								`systemctl is-active balena.service`,
 								this.link,
 							)) === 'active'
@@ -199,6 +201,7 @@ module.exports = {
 						(await this.context
 							.get()
 							.worker.executeCommandInHostOS(
+								// TODO: Do we need to use balena@.service here?
 								`systemctl is-active balena.service`,
 								this.link,
 							)) === 'active'

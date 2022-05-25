@@ -28,6 +28,7 @@ module.exports = {
 						(await this.context
 							.get()
 							.worker.executeCommandInHostOS(
+								// TODO: Do we need to use balena@.service here?
 								`systemctl is-active --quiet balena.service && echo "pass"`,
 								this.link,
 							)) === 'pass'

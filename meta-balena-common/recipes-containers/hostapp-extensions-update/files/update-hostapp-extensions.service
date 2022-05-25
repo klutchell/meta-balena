@@ -1,5 +1,6 @@
 [Unit]
 Description=Hostapp extensions updater
+# TODO: Do we need to use balena@.service here?
 Requires=resin-data.service balena-data-reset.service balena.service
 After=resin-data.service balena-data-reset.service balena.service
 

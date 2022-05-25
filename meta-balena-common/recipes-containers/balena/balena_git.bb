@@ -26,7 +26,7 @@ SRCREV = "13db38c82bdb056f013f5497b0662ad34ffb98f7"
 # 0: https://git.yoctoproject.org/meta-virtualization/tree/recipes-containers/docker/files
 SRC_URI = "\
 	git://github.com/balena-os/balena-engine.git;branch=${BALENA_BRANCH};destsuffix=git/src/import \
-	file://balena.service \
+	file://balena@.service \
 	file://balena-host.service \
 	file://balena-host.socket \
 	file://balena-healthcheck \
@@ -43,7 +43,7 @@ SECURITY_CFLAGS = "${SECURITY_NOPIE_CFLAGS}"
 SECURITY_LDFLAGS = ""
 
 SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE:${PN} = "balena.service balena-host.socket var-lib-docker.mount"
+SYSTEMD_SERVICE:${PN} = "balena@.service balena-host.socket var-lib-docker.mount"
 GO_IMPORT = "import"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "-r balena-engine"
@@ -118,7 +118,7 @@ do_install() {
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${S}/src/import/contrib/init/systemd/balena-engine.socket ${D}/${systemd_unitdir}/system
 
-	install -m 0644 ${WORKDIR}/balena.service ${D}/${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/balena@.service ${D}/${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/balena-host.service ${D}/${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/balena-host.socket ${D}/${systemd_unitdir}/system
 
@@ -127,6 +127,7 @@ do_install() {
 	mkdir -p ${D}/usr/lib/balena
 	install -m 0755 ${WORKDIR}/balena-healthcheck ${D}/usr/lib/balena/balena-healthcheck
 
+	# TODO: does this need to change to balena@.service.d?
 	install -d ${D}${sysconfdir}/systemd/system/balena.service.d
 	install -c -m 0644 ${WORKDIR}/balena.conf.storagemigration ${D}${sysconfdir}/systemd/system/balena.service.d/storagemigration.conf
 

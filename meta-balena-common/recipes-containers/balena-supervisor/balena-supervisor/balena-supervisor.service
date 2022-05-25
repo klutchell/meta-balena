@@ -8,6 +8,7 @@ Requires=\
     extract-balena-ca.service
 Wants=\
     migrate-supervisor-state.service
+# TODO: Do we need to use balena@.service here?
 After=\
     balena.service \
     resin\x2ddata.mount \
@@ -30,6 +31,7 @@ EnvironmentFile=/etc/balena-supervisor/supervisor.conf
 EnvironmentFile=-/tmp/update-supervisor.conf
 ExecStartPre=-@BINDIR@/balena stop resin_supervisor
 ExecStartPre=-@BINDIR@/balena stop balena_supervisor
+# TODO: Do we need to use balena@.service here?
 ExecStartPre=/bin/systemctl is-active balena.service
 ExecStart=/usr/bin/healthdog --healthcheck=/usr/lib/balena-supervisor/balena-supervisor-healthcheck @BINDIR@/start-balena-supervisor
 ExecStop=-@BINDIR@/balena stop balena_supervisor

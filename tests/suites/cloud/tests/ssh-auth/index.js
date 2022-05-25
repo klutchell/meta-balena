@@ -45,6 +45,7 @@ module.exports = {
 						this.balena.uuid);
 				}).then(() => {
 					return this.waitForServiceState(
+						// TODO: Do we need to use balena@.service here?
 						'balena.service',
 						'active',
 						this.balena.uuid,
