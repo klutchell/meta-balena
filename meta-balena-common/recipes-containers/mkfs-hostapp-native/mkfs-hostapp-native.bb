@@ -8,7 +8,7 @@ SRC_URI = " \
     file://mkfs.hostapp \
     "
 
-inherit native
+BBCLASSEXTEND = "native"
 
 DEPENDS = " \
     balena-native \
@@ -50,3 +50,5 @@ do_install () {
     install -d ${D}/${datadir}
     install ${B}/work/mkfs-hostapp-image.tar ${D}/${datadir}/
 }
+
+FILES:${PN} = " /usr/bin/mkfs-hostapp-image.tar"
