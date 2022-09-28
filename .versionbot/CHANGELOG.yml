@@ -1,4 +1,16 @@
 - commits:
+    - subject: Update balena-os/balena-supervisor to v14.2.7
+      hash: 661f65519b33449fafb18a47280dfda63f1e399d
+      body: Update balena-supervisor
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: renovate[bot]
+      nested: []
+  version: 2.105.3
+  title: "'Update balena-os/balena-supervisor to v14.2.7'"
+  date: 2022-09-28T17:14:37.284Z
+- commits:
     - subject: "contributing-device-support.md: Clarify repo set-up in balenaOS org"
       hash: ef51c09db6b72bed58d4662f11717c7835611eee
       body: ""
