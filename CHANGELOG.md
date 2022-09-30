@@ -1,6 +1,21 @@
 Change log
 -----------
 
+# v2.105.3
+## (2022-09-30)
+
+
+<details>
+<summary> Update tests/leviathan digest to a2079bd [renovate[bot]] </summary>
+
+> ## leviathan-2.9.7
+> ### (Invalid date)
+> 
+> * Splie interface name into config [rcooke-warwick]
+> * core: Specify wireless interface name for the 243390 device type [Alexandru Costache]
+> 
+</details>
+
 # v2.105.2
 ## (2022-09-22)
 
