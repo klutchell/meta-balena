@@ -82,7 +82,7 @@ deltask do_configure
 deltask do_compile
 deltask do_install
 
-do_package[vardeps] += " \
+do_build[vardeps] += " \
     SIGN_API \
     SIGN_GRUB_KEY_ID \
     SIGN_EFI_KEY_ID \
