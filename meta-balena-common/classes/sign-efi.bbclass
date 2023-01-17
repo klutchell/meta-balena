@@ -50,7 +50,7 @@ do_sign_efi[depends] += " \
     gnupg-native:do_populate_sysroot \
     "
 
-do_package[vardeps] += " \
+do_compile[vardeps] += " \
     SIGN_API \
     SIGN_EFI_KEY_ID \
     "
