@@ -37,10 +37,6 @@ RDEPENDS:${PN}:append = "${@oe.utils.conditional('SIGN_API','','',' cryptsetup d
 BALENA_IMAGE ?= "balena-image-${MACHINE}.balenaos-img"
 
 do_install() {
-    if [ -z "${INTERNAL_DEVICE_KERNEL}" ]; then
-        bbfatal "INTERNAL_DEVICE_KERNEL must be defined."
-    fi
-
     if [ -n "${INTERNAL_DEVICE_BOOTLOADER_CONFIG}" ] && [ -z "${INTERNAL_DEVICE_BOOTLOADER_CONFIG_PATH}" ]; then
         bbfatal "INTERNAL_DEVICE_BOOTLOADER_CONFIG requires INTERNAL_DEVICE_BOOTLOADER_CONFIG_PATH to be set."
     fi
